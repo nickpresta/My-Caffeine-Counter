@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>My Caffeine Counter - {% block title %}{% endblock %}</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        {% block extrahead %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <h1>My Caffeine Counter</h1>
+        </header>
+        <section id="content">
+            <header>{% block pagetitle %}{% endblock %}</header>
+            {% block content %}
+            {% endblock %}
+        </section>
+        <footer style="position: absolute; bottom: 0; right: 2em;">
+            <nav>{% spaceless %}
+                <ul>
+                    <li><a href="/about" title="About this site">About</a>
+                    <li><a href="/history" title="Past data">History</a>
+                </ul>
+
+            {% block extranav %}
+            {% endblock %}{% endspaceless %}</nav>
+        </footer>
+    </body>
+</html>
