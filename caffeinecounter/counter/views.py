@@ -9,6 +9,10 @@ from datetime import datetime
 from collections import defaultdict
 import operator
 
+# These next 2 lines get rid of a TclError when you don't
+# have a $DISPLAY variable set (like on my server)
+import matplotlib
+matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
