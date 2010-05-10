@@ -1,4 +1,18 @@
 {% extends 'counter/base.html' %}
 
 {% block title %}About{% endblock %}
-{% block pagetitle %}About My Caffeine Counter{% endblock %}
+
+{% block content %}
+<article>
+    <header><h2>About My Caffeine Countr</h2></header>
+    <p>This site is an online log of my daily caffeine intake. Over time, I will accumulate a significant amount of data, which will allow me to
+    graph, analyse, and make up statistics.</p>
+    <p>This site was made using <a href="http://python.org">Python</a>, <a href="http://djangoproject.com">Django</a>, <a href="http://sqlite.org">SQLite</a> and 
+    <a href="http://matplotlib.sourceforge.net/">Matplotlib</a>.<br />
+    It features <a href="http://www.w3.org/TR/html5/">HTML5</a>, and some <a href="http://en.wikipedia.org/wiki/JavaScript">JavaScript</a> to make things work.<br />
+    This source code for this site, although ugly, is available on <a href="http://github.com/NickPresta/My-Caffeine-Counter">GitHub</a>.</p>
+
+    <header><h2>About Me</h2></header>
+    <p>I'm just a guy, named <span>Nick Presta</span>, who likes to drink coffee on occasion.</p>
+</article>
+{% endblock %}

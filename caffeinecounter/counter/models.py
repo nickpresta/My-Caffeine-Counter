@@ -16,6 +16,7 @@ class Counter(models.Model):
 class Countable(models.Model):
     type = models.ForeignKey(Type)
     counter = models.ForeignKey(Counter)
+    added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.type.name

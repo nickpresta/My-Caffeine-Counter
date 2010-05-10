@@ -14,11 +14,12 @@ urlpatterns = patterns('',
 # counter patterns
 urlpatterns += patterns('caffeinecounter.counter.views',
     url(r'^$', 'index', name='counter-home'),
-    url(r'^history/$', 'history', name='counter-history'),
     url(r'^update/$', 'update', name='counter-update'),
+    url(r'^image/$', 'gen_image', name='counter-genimage'),
 )
 
 # direct template rendering
 urlpatterns += patterns('django.views.generic.simple',
     url(r'^about/$', 'direct_to_template', {'template': 'counter/about.html'}, name='counter-about'),
+    url(r'^history/$', 'direct_to_template', {'template': 'counter/history.html'}, name='counter-history'),
 )

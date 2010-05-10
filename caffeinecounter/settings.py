@@ -95,3 +95,5 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'caffeinecounter.counter',
 )
+
+USER = "Nick"

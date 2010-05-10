@@ -1,81 +1,16 @@
 {% extends "counter/base.html" %}
-{% load humanize %}
 
 {% block title %}Home{% endblock %}
 {% block extrahead %}
-<script type="text/javascript" src="/site_media/jquery.alerts-1.1/jquery.alerts.js"></script>
-<link rel="stylesheet" href="/site_media/jquery.alerts-1.1/jquery.alerts.css" type="text/css" />
-
+<script type="text/javascript" src="/site_media/js/jquery.alerts-1.1/jquery.alerts.js"></script>
+<link rel="stylesheet" href="/site_media/js/jquery.alerts-1.1/jquery.alerts.css" type="text/css" />
+<script type="text/javascript" src="/site_media/js/utils.js"></script>
 <script type="text/javascript">
-    function drawPlus(elm, size, color) {
-        var canvas = elm;
-
-        if (canvas.getContext) {
-            var ctx = canvas.getContext("2d");
-
-            ctx.fillStyle = color;
-            ctx.strokeStyle = color;
-
-            ctx.fillRect(size / 3, 0, size / 3, size);
-            ctx.fillRect(0, size / 3, size, size / 3);
-        } else {
-            alert("Your browser must support the Canvas element");
-        }
-    }
-
-    function drawText(elm, text, color, font, baseline, align) {
-        var canvas = elm;
-
-        canvas.setAttribute("value", text);
-        canvas.setAttribute("width", canvas.getAttribute("value").length * 70);
-
-        if (canvas.getContext) {
-            var ctx = canvas.getContext("2d");
-
-            ctx.width = 100;
-            ctx.height = 100;
-            ctx.fillStyle = color;
-            ctx.font = font;
-            ctx.textBaseline = baseline;
-            ctx.textAlign = align;
-
-            ctx.fillText(text, 0, 0);
-        } else {
-            alert("Your browser must support the Canvas element");
-        }
-    }
-
-    jQuery.fn.center = function() {
-        this.css("position","absolute");
-        this.css("top", ( $(window).height() - this.height() ) / 2+$(window).scrollTop() + "px");
-        this.css("left", ( $(window).width() - this.width() ) / 2+$(window).scrollLeft() + "px");
-        return this;
-    }
-
-    jQuery.fn.clearCanvas = function() {
-        this[0].width = this.width();
-    }
-
-    function updateCount(elm, cType) {
-        var data = { n: elm[0].getAttribute("value"), type: cType }
-        $.get("/update/", data, function (data) {
-            elm.fadeOut("slow", function() {
-                elm.clearCanvas();
-                var temp = new Array();
-                temp = data.split(",");
-                num = temp[0];
-                choice = temp[1];
-                $('body').data('choice', choice);
-                drawText(elm[0], num, "black", "7em Arial", "top", "start");
-                elm.fadeIn("slow");
-                $("#counter").center();
-            });
-        });
-    }
-
     $(document).ready(function() {
         var count = $("#count")[0];
         drawText(count, "{{ count }}", "black", "7em Arial", "top", "start");
+
+        {% if user.is_authenticated %}
         var plus = $("#plus-symbol")[0];
         drawPlus(plus, plus.getAttribute("width"), "green");
         $('body').data('choice', "{{ common_choice }}");
@@ -84,12 +19,12 @@
             jPrompt("Caffeine Type:", $('body').data('choice'), "Pick Your Caffeine Type", function(r) {
                 if (r) {
                     updateCount($("#count"), r);
-                    empty = false;
                 } else {
                     jAlert("You have to enter something!", "Error!");
                 }
             });
         });
+        {% endif %}
 
         $("#counter").center();
         $(window).bind("resize", function() {
@@ -99,12 +34,29 @@
 </script>
 {% endblock %}
 
-{% block extranav %}
-{% endblock %}
-
 {% block content %}
+<article id="intro">
+    <p>
+    {% if user.is_authenticated %}
+        Last time you were here, you had
+    {% else %}
+        {{ theUser }} recently had
+    {% endif%}
+    {% if latest_addition %}
+        {{ latest_addition.type.name }} (<time datetime="{{ latest_addition.added }}">{{ latest_addition.added|timesince }}</time> ago)
+    {% else %}
+        {% if user.is_authenticated %}
+            ...wait, what?!<br />You haven't had any caffeine today! Get to work!
+        {% else %}
+            ...nothing! How strange.
+        {% endif %}
+    {% endif %}
+    </p>
+</article>
 <article id="counter">
     <canvas id="count" width="70" height="101"></canvas>
+    {% if user.is_authenticated %}
     <canvas id="plus-symbol" width="100" height="100"></canvas>
+    {% endif %}
 </article>
 {% endblock %}

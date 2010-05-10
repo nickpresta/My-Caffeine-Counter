@@ -2,7 +2,8 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <title>My Caffeine Counter - {% block title %}{% endblock %}</title>
+        <title>My Caffeine Countr - {% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="/site_media/css/style.css" type="text/css" />
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
         <!--[if IE]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -12,10 +13,9 @@
     </head>
     <body>
         <header>
-        <h1><a href="{% url counter-home %}">My Caffeine Counter</a></h1>
+        <h1><a href="{% url counter-home %}">My Caffeine Countr</a> (beta)</h1>
         </header>
         <section id="content">
-            <header>{% block pagetitle %}{% endblock %}</header>
             {% block content %}
             {% endblock %}
         </section>
@@ -24,6 +24,11 @@
                 <ul>
                     <li><a href="{% url counter-about %}" title="About this site">About</a>
                     <li><a href="{% url counter-history %}" title="Past data">History</a>
+                    {% if user.is_authenticated %}
+                        <li><a href="/admin/logout/" title="Logout">Logout</a>
+                    {% else %}
+                        <li><a href="/admin/" title="Login">Login</a>
+                    {% endif %}
                 </ul>
 
             {% block extranav %}

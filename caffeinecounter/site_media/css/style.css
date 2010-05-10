@@ -1,0 +1,59 @@
+html {
+    margin: 0;
+    padding: 0;
+    background: #fff url("/site_media/images/gradient.jpg") no-repeat;
+    color: #666;
+    font: 100% Arial, sans-serif;
+    line-height: 1.7em;
+}
+
+body {
+    margin: 1em 2em;
+}
+
+h1 {
+    font-size: 2.18em;
+    letter-spacing: -0.01em;
+}
+
+h2 {
+    font-size: 1.45em;
+    letter-spacing: -0.02em;
+}
+
+a, a:link {
+    color: #cd853f;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:visited {
+    color: #a0522d;
+}
+
+article#intro {
+    line-height: 2em;
+    font-size: 2em;
+    text-align: center;
+}
+
+article#intro > p {
+    margin-top: 5em;
+}
+
+footer > nav > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 0.5em;
+}
+
+footer > nav > ul > li {
+    padding: 1em 1em 0 1em;
+    display: inline;
+}
+
+footer > nav > ul > li:hover {
+    background: #f5deb3;
+}
